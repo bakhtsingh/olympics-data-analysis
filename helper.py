@@ -101,14 +101,43 @@ def country_event_heatmap(df,country):
     return pt
 
 
-def most_successful_countrywise(df, country):
+def most_successful_countrywise1(df, country):
     temp_df = df.dropna(subset=['Medal'])
 
     temp_df = temp_df[temp_df['region'] == country]
 
-    x = temp_df['Name'].value_counts().reset_index().head(10).merge(df, left_on='count', right_on='Name', how='left')[
-        ['count', 'Name_x', 'Sport']].drop_duplicates('count')
-    x.rename(columns={'count': 'Name', 'Name_x': 'Medals'}, inplace=True)
+    x = temp_df['Name'].value_counts().reset_index().head(10).merge(df, left_on='index', right_on='Name', how='left')[
+        ['index', 'Name_x', 'Sport']].drop_duplicates('index')
+    x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
+    return x
+
+def most_successful_countrywise(df, country):
+    print("Original DataFrame:\n", df.head())
+
+    # Drop rows with missing values in the 'Medal' column
+    temp_df = df.dropna(subset=['Medal'])
+    print("After dropping NaNs in 'Medal' column:\n", temp_df.head())
+
+    # Filter the DataFrame for the specified country
+    temp_df = temp_df[temp_df['region'] == country]
+    print(f"After filtering for country ({country}):\n", temp_df.head())
+
+    # Get the top 10 names by medal count
+    name_counts = temp_df['Name'].value_counts().reset_index().head(10)
+    print("Top 10 names by medal count:\n", name_counts)
+
+    # Merge with the original DataFrame
+    x = name_counts.merge(df, left_on='index', right_on='Name', how='left')
+    print("After merging with original DataFrame:\n", x.head())
+
+    # Select and drop duplicate columns
+    x = x[['index', 'Name_x', 'Sport']].drop_duplicates('index')
+    print("After selecting columns and dropping duplicates:\n", x.head())
+
+    # Rename columns
+    x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
+    print("After renaming columns:\n", x.head())
+
     return x
 
 def weight_v_height(df,sport):
