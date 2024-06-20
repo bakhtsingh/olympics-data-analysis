@@ -47,7 +47,7 @@ def data_over_time1(df, col):
     nations_over_time.sort_values('Edition', inplace=True)
     return nations_over_time
 
-def data_over_time(df, col):
+def data_over_time1(df, col):
     print("Original DataFrame:\n", df.head())
     nations_over_time = df.drop_duplicates(['Year', col])['Year'].value_counts().reset_index()
     print("After dropping duplicates and value counts:\n", nations_over_time.head())
@@ -56,6 +56,20 @@ def data_over_time(df, col):
     nations_over_time.sort_values('Edition', inplace=True)
     print("After sorting by Edition:\n", nations_over_time.head())
     return nations_over_time
+
+def data_over_time(df, col):
+    # Drop duplicates based on 'Year' and the specified column
+    unique_years = df.drop_duplicates(['Year', col])
+    print("Unique Years:\n", unique_years.head())
+    # Count the occurrences of each year
+    year_counts = unique_years['Year'].value_counts().reset_index()
+    print("Year Counts Before:\n", year_counts.head())
+    # Rename the columns appropriately
+    year_counts.rename(columns={'index': 'Edition', 'Year': col}, inplace=True)
+    print("Year Counts After:\n", year_counts.head())
+    # Sort the DataFrame by 'Edition'
+    year_counts.sort_values('Edition', inplace=True)
+    return year_counts
 
 def most_successful(df, sport):
     temp_df = df.dropna(subset=['Medal'])
