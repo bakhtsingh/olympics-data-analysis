@@ -57,7 +57,7 @@ def data_over_time1(df, col):
     print("After sorting by Edition:\n", nations_over_time.head())
     return nations_over_time
 
-def data_over_time(df, col):
+def data_over_time1(df, col):
     # Drop duplicates based on 'Year' and the specified column
     unique_years = df.drop_duplicates(['Year', col])
     print("Unique Years:\n", unique_years.head())
