@@ -127,7 +127,7 @@ def most_successful_countrywise(df, country):
     print("Top 10 names by medal count:\n", name_counts)
 
     # Rename columns for clarity before merge
-    name_counts.rename(columns={'index': 'Name', 'Name': 'count'}, inplace=True)
+    name_counts.rename(columns={'index': 'Name', 'Name': 'Medals'}, inplace=True)
     print("After renaming columns in name_counts:\n", name_counts)
 
     # Merge with the original DataFrame
@@ -135,12 +135,8 @@ def most_successful_countrywise(df, country):
     print("After merging with original DataFrame:\n", x.head())
 
     # Select and drop duplicate columns
-    x = x[['Name', 'count', 'Sport']].drop_duplicates('Name')
+    x = x[['Name', 'Medals', 'Sport']].drop_duplicates('Name')
     print("After selecting columns and dropping duplicates:\n", x.head())
-
-    # Rename columns for final output
-    x.rename(columns={'count': 'Medals'}, inplace=True)
-    print("After renaming columns for final output:\n", x.head())
 
     return x
 
