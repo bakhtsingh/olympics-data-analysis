@@ -138,9 +138,8 @@ def most_successful_countrywise(df, country):
     x = x[['Name', 'Medals', 'Sport']].drop_duplicates('Name')
     print("After selecting columns and dropping duplicates:\n", x.head())
 
-    # Reset index to avoid displaying the index in the output
-    x.reset_index(drop=True, inplace=True)
-    print("After resetting index:\n", x.head())
+    # Optionally, drop the index when returning the DataFrame (for display purposes)
+    print("Final result (without index):\n", x.to_string(index=False))
 
     return x
 
