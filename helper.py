@@ -138,6 +138,14 @@ def most_successful_countrywise(df, country):
     x = x[['Name', 'Medals', 'Sport']].drop_duplicates('Name')
     print("After selecting columns and dropping duplicates:\n", x.head())
 
+    # Reset index to drop the original index
+    x = x.reset_index(drop=True)
+    print("After resetting index:\n", x.head())
+
+    # Set the new index starting from 1
+    x.index = x.index + 1
+    print("After setting new index starting from 1:\n", x.head())
+
     return x
 
 def weight_v_height(df,sport):

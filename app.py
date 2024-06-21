@@ -121,7 +121,7 @@ if user_menu == 'Country-wise Analysis':
 
     st.title(f"Top 10 athletes of {selected_country}")
     top10_df = helper.most_successful_countrywise(df, selected_country)
-    st.table(top10_df.to_string(index=False))
+    st.table(top10_df)
 
 # Athlete wise Analysis Section
 if user_menu == 'Athlete wise Analysis':
