@@ -127,7 +127,7 @@ def most_successful_countrywise(df, country):
     print("Top 10 names by medal count:\n", name_counts)
 
     # Rename columns for clarity before merge
-    name_counts.rename(columns={'index': 'Name', 'Name': 'Medals'}, inplace=True)
+    name_counts.rename(columns={'count': 'Medals', 'Name': 'Name'}, inplace=True)
     print("After renaming columns in name_counts:\n", name_counts)
 
     # Merge with the original DataFrame
