@@ -77,6 +77,20 @@ def most_successful(df, sport):
     if sport != 'Overall':
         temp_df = temp_df[temp_df['Sport'] == sport]
 
+    name_counts = temp_df['Name'].value_counts().reset_index().head(15)
+    name_counts.rename(columns={'count': 'Medals', 'Name': 'Name'}, inplace=True)
+    x = name_counts.merge(df, on='Name', how='left')
+    x = x[['Name', 'Medals', 'Sport', 'region']].drop_duplicates('Name')
+    x = x.reset_index(drop=True)
+    x.index = x.index + 1
+    return x
+
+def most_successful1(df, sport):
+    temp_df = df.dropna(subset=['Medal'])
+
+    if sport != 'Overall':
+        temp_df = temp_df[temp_df['Sport'] == sport]
+
     x = temp_df['Name'].value_counts().reset_index().head(15).merge(df, left_on='index', right_on='Name', how='left')[
         ['index', 'Name_x', 'Sport', 'region']].drop_duplicates('index')
     x.rename(columns={'index': 'Name', 'Name_x': 'Medals'}, inplace=True)
