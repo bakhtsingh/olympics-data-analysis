@@ -22,6 +22,7 @@ This project provides an interactive analysis of the Olympics dataset using Stre
 ## Live Demo
 
 - [Live Demo](https://olympic-data-analysis-bs-7489fc7fe9f1.herokuapp.com/)
+- [Live Demo2](https://olympics-data-analysis-bs.streamlit.app/)
 
 ## References
 
